@@ -1,19 +1,13 @@
-import MapScreen from "@/screens/MapScreen";
+import { ThemeProvider } from "@/context/ThemeContext";
 import useLocationPermission from "@/hooks/useLocationPermission";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import MapScreen from "@/screens/MapScreen";
 
 export default function App() {
   const { location, errorMsg } = useLocationPermission();
 
-  return <MapScreen />;
+  return (
+    <ThemeProvider>
+      <MapScreen />
+    </ThemeProvider>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
