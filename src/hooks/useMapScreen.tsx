@@ -8,6 +8,7 @@ export default function useMapScreen() {
   const mapRef = useRef<MapView>(null);
   const [userLocation, setUserLocation] =
     useState<UserLocationChangeEvent["nativeEvent"]["coordinate"]>();
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (userLocation) {
@@ -26,5 +27,20 @@ export default function useMapScreen() {
     setUserLocation(coordinate);
   }
 
-  return { models: { mapRef }, operations: { handleUserLocationChange } };
+  function handleSearchBarPress() {
+    setModalVisible(true);
+  }
+
+  function CloseDestinationModal() {
+    setModalVisible(false);
+  }
+
+  return {
+    models: { mapRef, modalVisible },
+    operations: {
+      CloseDestinationModal,
+      handleUserLocationChange,
+      handleSearchBarPress,
+    },
+  };
 }
